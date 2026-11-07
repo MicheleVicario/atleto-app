@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Struttura della scheda</title>
+<style>
+:root{
+  --bg:#f4f5f7; --surface:#ffffff; --surface-2:#f0f2f5; --line:#e2e5ea;
+  --text:#16181d; --muted:#5f6673; --accent:#e4572e; --accent-soft:#fde9e3;
+  --ok:#1f9d55; --ok-soft:#e3f5ea; --warn:#b7791f; --warn-soft:#fdf3dc;
+  --blue:#2b6cb0; --blue-soft:#e3eefa; --violet:#6b46c1; --violet-soft:#eee8fb;
+  --radius:12px; --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 14px rgba(0,0,0,.05);
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#121418; --surface:#1b1e24; --surface-2:#23272f; --line:#2f343d;
+    --text:#eceef2; --muted:#9aa2b0; --accent:#ff7a52; --accent-soft:#3a2219;
+    --ok:#48c47c; --ok-soft:#173225; --warn:#e0a84a; --warn-soft:#352a14;
+    --blue:#6aa8ec; --blue-soft:#172a40; --violet:#a98af0; --violet-soft:#2a2140;
+    --shadow:none;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.45 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+h1,h2,h3{margin:0;line-height:1.2}
+button,input,select{font:inherit;color:inherit}
+.wrap{max-width:1200px;margin:0 auto;padding:20px 16px 80px}
+header.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between;margin-bottom:16px}
+header.top h1{font-size:22px}
+header.top p{margin:4px 0 0;color:var(--muted)}
+.tabs{display:flex;gap:6px;background:var(--surface);padding:4px;border-radius:10px;border:1px solid var(--line);overflow-x:auto}
+.tabs button{border:0;background:none;padding:8px 12px;border-radius:7px;cursor:pointer;white-space:nowrap;color:var(--muted)}
+.tabs button.on{background:var(--accent);color:#fff}
+.panel{display:none}.panel.on{display:block}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.pill{display:inline-block;font-size:12px;padding:2px 8px;border-radius:99px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.k-single{background:var(--blue-soft);color:var(--blue)}
+.k-super{background:var(--violet-soft);color:var(--violet)}
+.k-circ{background:var(--accent-soft);color:var(--accent)}
+.k-cardio{background:var(--ok-soft);color:var(--ok)}
+.k-body{background:var(--warn-soft);color:var(--warn)}
+
+/* ---------- 1. Struttura ---------- */
+.tree{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:900px){.tree{grid-template-columns:1.1fr 1fr}}
+.levels{padding:18px}
+.level{display:flex;gap:12px;padding:12px 0;border-bottom:1px dashed var(--line)}
+.level:last-child{border:0}
+.level .n{flex:0 0 30px;height:30px;border-radius:50%;background:var(--accent);color:#fff;display:grid;place-items:center;font-weight:600}
+.level h3{font-size:16px;margin-bottom:2px}
+.level p{margin:2px 0;color:var(--muted)}
+.level .ex{font-size:13px;margin-top:4px}
+.types{padding:18px}
+.types table{width:100%;border-collapse:collapse;font-size:14px}
+.types th,.types td{text-align:left;padding:9px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+.types th{font-size:12px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.03em}
+.note{margin-top:14px;padding:12px 14px;border-radius:10px;background:var(--warn-soft);font-size:14px}
+
+/* ---------- 2. Editor trainer ---------- */
+.editor{display:grid;gap:14px;grid-template-columns:1fr}
+@media(min-width:1000px){.editor{grid-template-columns:200px 1fr 280px}}
+.ed-head{padding:14px 16px;display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.ed-head .t{font-size:18px;font-weight:600}
+.btns{display:flex;flex-wrap:wrap;gap:8px}
+.btn{border:1px solid var(--line);background:var(--surface);padding:7px 12px;border-radius:8px;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.days{padding:10px;display:flex;gap:6px;overflow-x:auto}
+@media(min-width:1000px){.days{flex-direction:column;overflow:visible}}
+.day{border:1px solid var(--line);border-radius:9px;padding:8px 10px;cursor:pointer;background:var(--surface);white-space:nowrap}
+.day.on{border-color:var(--accent);background:var(--accent-soft)}
+.day small{display:block;color:var(--muted)}
+.blocks{display:flex;flex-direction:column;gap:12px}
+.block{padding:12px 14px}
+.block-h{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-bottom:8px}
+.block-h .l{display:flex;gap:8px;align-items:center}
+.block-h select{border:1px solid var(--line);border-radius:7px;padding:4px 6px;background:var(--surface)}
+.bparams{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 10px;padding:8px 10px;background:var(--surface-2);border-radius:8px;font-size:13px}
+.bparams label{display:flex;align-items:center;gap:6px}
+.f{width:64px;border:1px solid var(--line);border-radius:6px;padding:4px 6px;background:var(--surface);text-align:center}
+.f.w{width:110px;text-align:left}
+.erow{display:grid;grid-template-columns:44px 1fr;gap:10px;padding:10px 0;border-top:1px solid var(--line)}
+.thumb{width:44px;height:44px;border-radius:8px;background:repeating-linear-gradient(45deg,var(--surface-2),var(--surface-2) 6px,var(--line) 6px,var(--line) 12px);display:grid;place-items:center;font-size:10px;color:var(--muted)}
+.ename{font-weight:600;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.efields{display:flex;flex-wrap:wrap;gap:10px;margin-top:6px;font-size:13px;color:var(--muted)}
+.efields label{display:flex;align-items:center;gap:5px}
+.efields .ind{flex-basis:100%}
+.efields .ind input{width:100%;max-width:420px;border:1px solid var(--line);border-radius:6px;padding:5px 8px;background:var(--surface)}
+.off{opacity:.55;text-decoration:line-through}
+.addb{border:1px dashed var(--line);background:none;border-radius:10px;padding:10px;cursor:pointer;color:var(--muted)}
+.lib{padding:12px}
+.lib input[type=search]{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 10px;background:var(--surface)}
+.filters{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.filters span{font-size:12px;padding:3px 8px;border:1px solid var(--line);border-radius:99px;cursor:pointer}
+.filters span.on{background:var(--text);color:var(--surface);border-color:var(--text)}
+.litem{display:flex;gap:8px;align-items:center;padding:7px 0;border-top:1px solid var(--line);font-size:14px}
+.litem .thumb{width:34px;height:34px}
+.litem button{margin-left:auto;border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:2px 8px;cursor:pointer}
+.legend{font-size:13px;margin-top:10px}
+
+/* ---------- 3. Cliente ---------- */
+.client-wrap{display:grid;gap:18px;grid-template-columns:1fr;justify-items:center}
+@media(min-width:900px){.client-wrap{grid-template-columns:390px 1fr;justify-items:start;align-items:start}}
+.phone{width:100%;max-width:390px;background:var(--bg);border:1px solid var(--line);border-radius:28px;overflow:hidden;box-shadow:var(--shadow);position:relative}
+@media(min-width:420px){.phone{border:8px solid #1d1f24}}
+.ph-top{background:var(--surface);padding:14px 16px 10px;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:2}
+.ph-top .t{font-weight:700;font-size:17px}
+.prog{height:6px;background:var(--surface-2);border-radius:99px;margin-top:8px;overflow:hidden}
+.prog i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.ph-body{padding:12px;display:flex;flex-direction:column;gap:12px;max-height:680px;overflow-y:auto;padding-bottom:110px}
+.cx{padding:12px}
+.cx-h{display:flex;gap:10px;align-items:flex-start}
+.cx-h .thumb{flex:0 0 52px;width:52px;height:52px}
+.cx-name{font-weight:650}
+.last{font-size:12px;color:var(--muted);margin-top:2px}
+.tip{font-size:12px;margin-top:4px;padding:5px 8px;background:var(--surface-2);border-radius:6px}
+.sets{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.set{display:grid;grid-template-columns:28px 1fr 1fr 42px;gap:6px;align-items:center}
+.set.three{grid-template-columns:28px 1fr 42px}
+.set .idx{font-size:12px;color:var(--muted);text-align:center}
+.set input{width:100%;border:1px solid var(--line);border-radius:8px;padding:8px 6px;text-align:center;background:var(--surface)}
+.set input::placeholder{color:var(--muted);opacity:.8}
+.chk{width:42px;height:38px;border-radius:9px;border:1.5px solid var(--line);background:var(--surface);cursor:pointer;font-size:18px;color:var(--line)}
+.set.done .chk{background:var(--ok);border-color:var(--ok);color:#fff}
+.set.done input{background:var(--ok-soft);border-color:transparent}
+.colh{display:grid;grid-template-columns:28px 1fr 1fr 42px;gap:6px;font-size:11px;color:var(--muted);text-align:center;margin-top:8px}
+.colh.three{grid-template-columns:28px 1fr 42px}
+.round{margin-top:8px;padding:8px;border:1px solid var(--line);border-radius:9px}
+.round h4{margin:0 0 6px;font-size:13px;display:flex;justify-content:space-between}
+.citem{display:flex;align-items:center;gap:8px;padding:5px 0;font-size:14px}
+.citem span{flex:1}
+.citem.done span{color:var(--muted);text-decoration:line-through}
+.timer{position:absolute;left:10px;right:10px;bottom:10px;background:var(--text);color:var(--surface);border-radius:14px;padding:10px 14px;display:none;align-items:center;gap:12px;z-index:5}
+.timer.on{display:flex}
+.timer .big{font-size:26px;font-weight:700;font-variant-numeric:tabular-nums;min-width:70px}
+.timer .lbl{font-size:12px;opacity:.8}
+.timer button{margin-left:auto;border:0;border-radius:8px;padding:7px 10px;background:var(--accent);color:#fff;cursor:pointer}
+.timer .bar{position:absolute;left:0;bottom:0;height:3px;background:var(--accent);border-radius:0 0 14px 14px}
+.savebar{display:flex;gap:8px}
+.savebar .btn{flex:1}
+.side{padding:16px;max-width:560px}
+.side h3{font-size:16px;margin-bottom:8px}
+.side ul{margin:0;padding-left:18px}
+.side li{margin:6px 0}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div>
+      <a href="index.html" style="font-size:13px;text-decoration:none;color:var(--muted)">← Tutte le anteprime</a>
+      <h1>Atleto.it · Struttura della scheda</h1>
+      <p>Anteprima per discutere la struttura. Dati di esempio, grafica provvisoria.</p>
+    </div>
+    <nav class="tabs" role="tablist">
+      <button class="on" data-tab="p1">1 · Come è fatta</button>
+      <button data-tab="p2">2 · Il trainer la compila</button>
+      <button data-tab="p3">3 · Il cliente la usa</button>
+    </nav>
+  </header>
+
+  <!-- ================= 1. STRUTTURA ================= -->
+  <section id="p1" class="panel on">
+    <div class="tree">
+      <div class="card levels">
+        <div class="level"><div class="n">1</div><div>
+          <h3>Scheda</h3>
+          <p>Titolo, obiettivo, durata in settimane. Si assegna a un cliente (o al trainer stesso), si duplica, si salva come modello.</p>
+          <p class="ex">Es. «Forza – Gennaio», 8 settimane</p></div></div>
+        <div class="level"><div class="n">2</div><div>
+          <h3>Giorni</h3>
+          <p>Una scheda di <b>n</b> giorni diventa <b>n</b> card per il cliente. Il cliente sceglie quale fare quel giorno.</p>
+          <p class="ex">Es. Giorno A · Giorno B · Giorno C</p></div></div>
+        <div class="level"><div class="n">3</div><div>
+          <h3>Blocchi</h3>
+          <p>Il <b>pezzo nuovo</b>. Raggruppa gli esercizi e dice <b>come</b> si eseguono: uno alla volta, in superserie, in circuito. Il blocco porta i parametri comuni (giri, tempi, pause).</p>
+          <p class="ex">Es. «Circuito finale: 3 giri, 40" lavoro / 20" pausa, 60" tra i giri»</p></div></div>
+        <div class="level"><div class="n">4</div><div>
+          <h3>Esercizi</h3>
+          <p>Scelti dalla libreria. I campi cambiano con il tipo di esercizio: ripetizioni, tempo, distanza. Ognuno può avere una breve <b>indicazione del trainer</b>.</p>
+          <p class="ex">Es. Panca piana · 4 serie × 8–10 · recupero 90" · «gomiti a 45°»</p></div></div>
+        <div class="level"><div class="n">5</div><div>
+          <h3>Serie svolte</h3>
+          <p>Le compila il <b>cliente</b> in palestra: valori fatti (anche il carico usato) e spunta. Le serie non spuntate restano «non completate».</p></div></div>
+      </div>
+
+      <div class="card types">
+        <h3 style="margin-bottom:10px">Tipi di blocco</h3>
+        <table>
+          <thead><tr><th>Tipo</th><th>Parametri del blocco</th><th>Campi per esercizio</th></tr></thead>
+          <tbody>
+            <tr><td><span class="pill k-single">Singolo</span></td><td class="muted">—</td><td>serie, ripetizioni (min–max), recupero</td></tr>
+            <tr><td><span class="pill k-super">Superserie</span></td><td>serie, recupero dopo il giro</td><td>ripetizioni (si fanno uno dopo l'altro, senza pausa)</td></tr>
+            <tr><td><span class="pill k-circ">Circuito</span></td><td>giri, lavoro o ripetizioni, pausa tra esercizi, pausa tra giri</td><td>ripetizioni <i>oppure</i> secondi</td></tr>
+            <tr><td><span class="pill k-cardio">Cardio</span></td><td class="muted">—</td><td>durata e/o distanza, eventuali ripetute</td></tr>
+            <tr><td><span class="pill k-body">Corpo libero</span></td><td class="muted">—</td><td>serie, ripetizioni <i>oppure</i> tenuta in secondi, recupero. Zavorra o assistenza le scrive il cliente</td></tr>
+          </tbody>
+        </table>
+        <div class="note"><b>Carico:</b> il trainer non lo indica (per ora è spento). Il cliente scrive comunque il carico che ha usato, e la volta dopo lo vede in «ultima volta».</div>
+        <div class="note" style="background:var(--blue-soft)"><b>Il cliente non modifica la scheda:</b> non aggiunge, toglie o sostituisce esercizi. Inserisce solo i valori svolti.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 2. EDITOR TRAINER ================= -->
+  <section id="p2" class="panel">
+    <div class="card ed-head">
+      <div>
+        <div class="t">Forza – Gennaio</div>
+        <div class="muted" style="font-size:13px">Cliente: Luca B. · 8 settimane · dal 12/01 · versione 2</div>
+      </div>
+      <div class="btns">
+        <button class="btn">Duplica</button>
+        <button class="btn">Salva come modello</button>
+        <button class="btn">Anteprima cliente</button>
+        <button class="btn primary">Assegna</button>
+      </div>
+    </div>
+
+    <div class="editor">
+      <div class="card days">
+        <div class="day on">Giorno A<small>Petto · Dorso</small></div>
+        <div class="day">Giorno B<small>Gambe</small></div>
+        <div class="day">Giorno C<small>Corsa + core</small></div>
+        <div class="day" style="border-style:dashed;color:var(--muted)">+ Giorno</div>
+      </div>
+
+      <div class="blocks" id="blocks">
+        <!-- Blocco singolo -->
+        <div class="card block">
+          <div class="block-h"><div class="l"><span class="pill k-single">Singolo</span><b>Riscaldamento e forza</b></div>
+            <select data-kind><option selected>Singolo</option><option>Superserie</option><option>Circuito</option><option>Cardio</option><option>Corpo libero</option></select></div>
+          <div class="erow"><div class="thumb">GIF</div><div>
+            <div class="ename">Panca piana con bilanciere</div>
+            <div class="efields">
+              <label>Serie <input class="f" value="4"></label>
+              <label>Ripetizioni <input class="f" value="8"> – <input class="f" value="10"></label>
+              <label>Recupero <input class="f" value="90"> s</label>
+              <label class="off">Carico</label>
+              <label class="ind"><input placeholder="Indicazione per il cliente (facoltativa)" value="Gomiti a 45°, scendi lento"></label>
+            </div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div>
+            <div class="ename">Rematore con manubrio <span class="pill">unilaterale</span></div>
+            <div class="efields">
+              <label>Serie <input class="f" value="3"></label>
+              <label>Ripetizioni <input class="f" value="10"> – <input class="f" value="12"></label>
+              <label>Recupero <input class="f" value="60"> s</label>
+              <label class="ind"><input placeholder="Indicazione per il cliente (facoltativa)"></label>
+            </div></div></div>
+        </div>
+
+        <!-- Superserie -->
+        <div class="card block">
+          <div class="block-h"><div class="l"><span class="pill k-super">Superserie</span><b>Braccia</b></div>
+            <select data-kind><option>Singolo</option><option selected>Superserie</option><option>Circuito</option><option>Cardio</option><option>Corpo libero</option></select></div>
+          <div class="bparams">
+            <label>Serie <input class="f" value="3"></label>
+            <label>Recupero dopo la coppia <input class="f" value="75"> s</label>
+          </div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">A1 · Curl con manubri</div>
+            <div class="efields"><label>Ripetizioni <input class="f" value="12"></label></div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">A2 · French press</div>
+            <div class="efields"><label>Ripetizioni <input class="f" value="12"></label></div></div></div>
+        </div>
+
+        <!-- Circuito -->
+        <div class="card block">
+          <div class="block-h"><div class="l"><span class="pill k-circ">Circuito</span><b>Finale metabolico</b></div>
+            <select data-kind><option>Singolo</option><option>Superserie</option><option selected>Circuito</option><option>Cardio</option><option>Corpo libero</option></select></div>
+          <div class="bparams">
+            <label>Modalità <select class="f w"><option selected>A tempo (tabata)</option><option>A ripetizioni</option></select></label>
+            <label>Giri <input class="f" value="3"></label>
+            <label>Lavoro <input class="f" value="40"> s</label>
+            <label>Pausa tra esercizi <input class="f" value="20"> s</label>
+            <label>Pausa tra giri <input class="f" value="60"> s</label>
+          </div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Burpees</div><div class="efields"><label>a tempo (40")</label></div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Mountain climber</div><div class="efields"><label>a tempo (40")</label></div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Swing con kettlebell</div><div class="efields"><label>a tempo (40")</label></div></div></div>
+        </div>
+
+        <!-- Corpo libero -->
+        <div class="card block">
+          <div class="block-h"><div class="l"><span class="pill k-body">Corpo libero</span><b>Core e trazioni</b></div>
+            <select data-kind><option>Singolo</option><option>Superserie</option><option>Circuito</option><option>Cardio</option><option selected>Corpo libero</option></select></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Trazioni alla sbarra</div>
+            <div class="efields"><label>Serie <input class="f" value="4"></label><label>Ripetizioni <input class="f" value="5"> – <input class="f" value="8"></label><label>Recupero <input class="f" value="120"> s</label></div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Plank</div>
+            <div class="efields"><label>Serie <input class="f" value="3"></label><label>Tenuta <input class="f" value="45"> s</label><label>Recupero <input class="f" value="45"> s</label></div></div></div>
+        </div>
+
+        <!-- Cardio -->
+        <div class="card block">
+          <div class="block-h"><div class="l"><span class="pill k-cardio">Cardio</span><b>Defaticamento</b></div>
+            <select data-kind><option>Singolo</option><option>Superserie</option><option>Circuito</option><option selected>Cardio</option><option>Corpo libero</option></select></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Corsa su tapis roulant</div>
+            <div class="efields"><label>Durata <input class="f" value="15"> min</label><label>oppure distanza <input class="f" value=""> km</label><label class="ind"><input value="Ritmo tranquillo, devi riuscire a parlare"></label></div></div></div>
+          <div class="erow"><div class="thumb">GIF</div><div><div class="ename">Ripetute di corsa</div>
+            <div class="efields"><label>Serie <input class="f" value="6"></label><label>Distanza <input class="f" value="400"> m</label><label>Recupero <input class="f" value="90"> s</label></div></div></div>
+        </div>
+
+        <button class="addb">+ Aggiungi blocco</button>
+      </div>
+
+      <div class="card lib">
+        <b>Libreria</b>
+        <input type="search" placeholder="Cerca esercizio…" style="margin-top:8px">
+        <div class="filters">
+          <span class="on">Tutti</span><span>Petto</span><span>Dorso</span><span>Gambe</span><span>Core</span>
+          <span>Bilanciere</span><span>Manubri</span><span>Corpo libero</span><span>Corsa</span>
+        </div>
+        <div class="litem"><div class="thumb"></div>Croci ai cavi<button>+</button></div>
+        <div class="litem"><div class="thumb"></div>Dip alle parallele<button>+</button></div>
+        <div class="litem"><div class="thumb"></div>Squat con bilanciere<button>+</button></div>
+        <div class="litem"><div class="thumb"></div>Hollow hold<button>+</button></div>
+        <div class="litem"><div class="thumb"></div>Affondi camminati<button>+</button></div>
+        <div class="litem"><div class="thumb" style="background:var(--warn-soft)"></div>Mio: Panca con pausa <span class="pill" style="margin-left:4px">in attesa</span><button>+</button></div>
+        <p class="legend muted">Sul telefono la libreria si apre a tutto schermo con «+ Aggiungi esercizio». Gli esercizi in attesa di approvazione i clienti li vedono solo come testo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= 3. CLIENTE ================= -->
+  <section id="p3" class="panel">
+    <div class="client-wrap">
+      <div class="phone">
+        <div class="ph-top">
+          <div class="muted" style="font-size:12px">Forza – Gennaio · settimana 3</div>
+          <div class="t">Giorno A · Petto e dorso</div>
+          <div class="prog"><i id="prog"></i></div>
+        </div>
+        <div class="ph-body" id="cbody">
+
+          <div class="card cx" data-rest="90">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name">Panca piana con bilanciere</div>
+              <div class="muted" style="font-size:13px">4 × 8–10 · recupero 90"</div>
+              <div class="last">Ultima volta: 60 kg · 10 · 9 · 8 · 8</div></div></div>
+            <div class="tip">Gomiti a 45°, scendi lento</div>
+            <div class="colh"><span>#</span><span>kg</span><span>rip.</span><span></span></div>
+            <div class="sets">
+              <div class="set"><span class="idx">1</span><input inputmode="decimal" placeholder="60"><input inputmode="numeric" placeholder="10"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">2</span><input inputmode="decimal" placeholder="60"><input inputmode="numeric" placeholder="9"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">3</span><input inputmode="decimal" placeholder="60"><input inputmode="numeric" placeholder="8"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">4</span><input inputmode="decimal" placeholder="60"><input inputmode="numeric" placeholder="8"><button class="chk">✓</button></div>
+            </div>
+          </div>
+
+          <div class="card cx" data-rest="75">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name"><span class="pill k-super">Superserie</span> Curl + French press</div>
+              <div class="muted" style="font-size:13px">3 giri · 12 + 12 · recupero 75" dopo la coppia</div>
+              <div class="last">Ultima volta: 10 kg × 12 · 8 kg × 12</div></div></div>
+            <div class="colh"><span>#</span><span>Curl (kg × rip.)</span><span>French (kg × rip.)</span><span></span></div>
+            <div class="sets">
+              <div class="set"><span class="idx">1</span><input placeholder="10 × 12"><input placeholder="8 × 12"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">2</span><input placeholder="10 × 12"><input placeholder="8 × 12"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">3</span><input placeholder="10 × 12"><input placeholder="8 × 12"><button class="chk">✓</button></div>
+            </div>
+          </div>
+
+          <div class="card cx" id="circuit" data-work="40" data-pause="20" data-round="60">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name"><span class="pill k-circ">Circuito</span> Finale metabolico</div>
+              <div class="muted" style="font-size:13px">A tempo · 3 giri · 40" lavoro / 20" pausa · 60" tra i giri · ~9 min</div></div></div>
+            <div id="rounds"></div>
+            <button class="btn primary" id="tabStart" style="width:100%;margin-top:10px">▶ Avvia circuito</button>
+          </div>
+
+          <div class="card cx" data-rest="45">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name">Plank</div>
+              <div class="muted" style="font-size:13px">3 × 45" · recupero 45"</div>
+              <div class="last">Ultima volta: 45" · 40" · 35"</div></div></div>
+            <div class="colh three"><span>#</span><span>secondi</span><span></span></div>
+            <div class="sets">
+              <div class="set three"><span class="idx">1</span><input inputmode="numeric" placeholder="45"><button class="chk">✓</button></div>
+              <div class="set three"><span class="idx">2</span><input inputmode="numeric" placeholder="45"><button class="chk">✓</button></div>
+              <div class="set three"><span class="idx">3</span><input inputmode="numeric" placeholder="45"><button class="chk">✓</button></div>
+            </div>
+          </div>
+
+          <div class="card cx">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name"><span class="pill k-cardio">Cardio</span> Corsa su tapis roulant</div>
+              <div class="muted" style="font-size:13px">15 min</div>
+              <div class="last">Ultima volta: 15 min · 2,1 km</div></div></div>
+            <div class="tip">Ritmo tranquillo, devi riuscire a parlare</div>
+            <div class="colh"><span></span><span>minuti</span><span>km</span><span></span></div>
+            <div class="sets">
+              <div class="set" data-norest><span class="idx"></span><input inputmode="numeric" placeholder="15"><input inputmode="decimal" placeholder="2,1"><button class="chk">✓</button></div>
+            </div>
+          </div>
+
+          <div class="card cx" data-rest="90">
+            <div class="cx-h"><div class="thumb">GIF</div><div>
+              <div class="cx-name"><span class="pill k-cardio">Cardio</span> Ripetute di corsa</div>
+              <div class="muted" style="font-size:13px">6 × 400 m · recupero 90"</div>
+              <div class="last">Ultima volta: 1'52" · 1'50" · 1'55" · 1'54" · 1'58" · 2'01"</div></div></div>
+            <div class="colh"><span>#</span><span>metri</span><span>tempo</span><span></span></div>
+            <div class="sets">
+              <div class="set"><span class="idx">1</span><input placeholder="400"><input placeholder="1'52&quot;"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">2</span><input placeholder="400"><input placeholder="1'50&quot;"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">3</span><input placeholder="400"><input placeholder="1'55&quot;"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">4</span><input placeholder="400"><input placeholder="1'54&quot;"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">5</span><input placeholder="400"><input placeholder="1'58&quot;"><button class="chk">✓</button></div>
+              <div class="set"><span class="idx">6</span><input placeholder="400"><input placeholder="2'01&quot;"><button class="chk">✓</button></div>
+            </div>
+          </div>
+
+          <div class="savebar"><button class="btn">Interrompi</button><button class="btn primary">Salva allenamento</button></div>
+          <p class="muted" style="font-size:12px;margin:0">Le serie non spuntate si salvano come «non completate».</p>
+        </div>
+
+        <div class="timer" id="timer">
+          <div><div class="lbl" id="tlbl">Recupero</div><div class="big" id="tbig">0:00</div></div>
+          <button id="tpause" style="display:none;background:#555">Pausa</button><button id="tskip">Salta</button>
+          <div class="bar" id="tbar"></div>
+        </div>
+      </div>
+
+      <div class="card side">
+        <h3>Prova l'anteprima</h3>
+        <ul>
+          <li>Spunta una serie (✓): parte da solo il <b>recupero deciso dal trainer</b>.</li>
+          <li>I campi grigi mostrano i valori dell'<b>ultima volta</b>: se li lasci vuoti e spunti, valgono quelli.</li>
+          <li>Il <b>circuito a tempo</b> funziona come un'app tabata: premi «Avvia circuito» e lavoro e pause partono uno dopo l'altro, con un segnale sonoro a ogni cambio. Gli esercizi si spuntano da soli; puoi mettere in pausa o saltare.</li>
+          <li>La <b>superserie</b> si spunta come coppia.</li>
+          <li>Le <b>ripetute</b> sono serie con la distanza al posto delle ripetizioni.</li>
+          <li>La barra in alto mostra quanto manca alla fine della seduta.</li>
+        </ul>
+        
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+// Schede
+document.querySelectorAll('.tabs button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));
+  document.querySelectorAll('.panel').forEach(p=>p.classList.toggle('on',p.id===b.dataset.tab));
+}));
+// Giorni ed etichette del blocco nell'editor
+document.querySelectorAll('.day').forEach(d=>d.addEventListener('click',()=>{
+  if(d.textContent.startsWith('+'))return;
+  document.querySelectorAll('.day').forEach(x=>x.classList.toggle('on',x===d));
+}));
+const kindCls={'Singolo':'k-single','Superserie':'k-super','Circuito':'k-circ','Cardio':'k-cardio','Corpo libero':'k-body'};
+document.querySelectorAll('select[data-kind]').forEach(s=>s.addEventListener('change',()=>{
+  const pill=s.closest('.block').querySelector('.block-h .pill');
+  pill.className='pill '+kindCls[s.value]; pill.textContent=s.value;
+}));
+document.querySelectorAll('.filters span').forEach(f=>f.addEventListener('click',()=>f.classList.toggle('on')));
+
+// Circuito: 3 giri
+const circ=document.getElementById('circuit');
+const exs=['Burpees','Mountain climber','Swing con kettlebell'];
+const rounds=document.getElementById('rounds');
+for(let g=1;g<=3;g++){
+  const r=document.createElement('div');r.className='round';
+  r.innerHTML='<h4><span>Giro '+g+' di 3</span><span class="muted" style="font-weight:400">'+(g<3?'poi 60" di pausa':'ultimo giro')+'</span></h4>'+
+    exs.map((e,i)=>'<div class="citem" data-ex="'+i+'" data-round="'+g+'"><span>'+e+' · 40"</span><button class="chk">✓</button></div>').join('');
+  rounds.appendChild(r);
+}
+
+// Timer di recupero
+const T={el:document.getElementById('timer'),big:document.getElementById('tbig'),lbl:document.getElementById('tlbl'),bar:document.getElementById('tbar'),id:null};
+function startTimer(sec,label){
+  if(tab.on) return;
+  clearInterval(T.id); let left=sec; const tot=sec;
+  T.lbl.textContent=label; T.el.classList.add('on');
+  const draw=()=>{T.big.textContent=Math.floor(left/60)+':'+String(left%60).padStart(2,'0');T.bar.style.width=(100*(tot-left)/tot)+'%';};
+  draw();
+  T.id=setInterval(()=>{left--; if(left<=0){stopTimer();return;} draw();},1000);
+}
+function stopTimer(){clearInterval(T.id);T.el.classList.remove('on');}
+document.getElementById('tskip').addEventListener('click',()=>{ if(tab.on){tabNext();} else stopTimer(); });
+
+// Circuito a tempo (tabata): lavoro e pause in coda, da soli
+let actx=null;
+function beep(f,d){try{actx=actx||new (window.AudioContext||window.webkitAudioContext)();const o=actx.createOscillator(),g=actx.createGain();o.frequency.value=f;o.connect(g);g.connect(actx.destination);g.gain.setValueAtTime(.2,actx.currentTime);o.start();o.stop(actx.currentTime+d);}catch(e){}}
+const steps=[];
+for(let g=1;g<=3;g++){exs.forEach((e,i)=>{
+  steps.push({sec:+circ.dataset.work,label:'Lavoro · '+e+' · giro '+g+'/3',item:'[data-round="'+g+'"][data-ex="'+i+'"]'});
+  const lastEx=i===exs.length-1;
+  if(!lastEx) steps.push({sec:+circ.dataset.pause,label:'Pausa · poi '+exs[i+1]});
+  else if(g<3) steps.push({sec:+circ.dataset.round,label:'Pausa tra i giri · poi giro '+(g+1)});
+});}
+const tab={i:0,left:0,id:null,paused:false,on:false};
+const pauseBtn=document.getElementById('tpause');
+function tabDraw(){const st=steps[tab.i];T.lbl.textContent=st.label;T.big.textContent=Math.floor(tab.left/60)+':'+String(tab.left%60).padStart(2,'0');T.bar.style.width=(100*(st.sec-tab.left)/st.sec)+'%';
+  document.querySelectorAll('.citem').forEach(c=>c.style.fontWeight='');if(st.item){const c=document.querySelector(st.item);c.style.fontWeight='700';}}
+function tabNext(){const st=steps[tab.i];if(st.item){document.querySelector(st.item).classList.add('done');progress();}
+  tab.i++; if(tab.i>=steps.length){tabStop();beep(1200,.6);return;}
+  tab.left=steps[tab.i].sec; beep(steps[tab.i].item?1000:600,.25); tabDraw();}
+function tabTick(){if(tab.paused)return;tab.left--; if(tab.left<=3&&tab.left>0)beep(800,.08); if(tab.left<=0)tabNext(); else tabDraw();}
+function tabStop(){clearInterval(tab.id);tab.on=false;pauseBtn.style.display='none';T.el.classList.remove('on');document.querySelectorAll('.citem').forEach(c=>c.style.fontWeight='');}
+document.getElementById('tabStart').addEventListener('click',()=>{
+  clearInterval(T.id); tab.i=0; tab.left=steps[0].sec; tab.paused=false; tab.on=true;
+  document.querySelectorAll('.citem').forEach(c=>c.classList.remove('done'));
+  T.el.classList.add('on'); pauseBtn.style.display=''; pauseBtn.textContent='Pausa'; beep(1000,.25); tabDraw();
+  clearInterval(tab.id); tab.id=setInterval(tabTick,1000);
+});
+pauseBtn.addEventListener('click',()=>{tab.paused=!tab.paused;pauseBtn.textContent=tab.paused?'Riprendi':'Pausa';});
+
+// Avanzamento
+function progress(){
+  const all=document.querySelectorAll('#cbody .set, #cbody .citem');
+  const done=document.querySelectorAll('#cbody .set.done, #cbody .citem.done');
+  document.getElementById('prog').style.width=(100*done.length/all.length)+'%';
+}
+
+// Spunta delle serie
+document.getElementById('cbody').addEventListener('click',e=>{
+  const b=e.target.closest('.chk'); if(!b)return;
+  const row=b.closest('.set, .citem'); const wasDone=row.classList.contains('done');
+  row.classList.toggle('done');
+  if(row.classList.contains('set')){
+    row.querySelectorAll('input').forEach(i=>{ if(!wasDone && !i.value) i.value=i.placeholder; });
+    const card=row.closest('.cx');
+    if(!wasDone && card.dataset.rest && !row.hasAttribute('data-norest')){
+      const isLast=row===card.querySelector('.sets .set:last-child');
+      if(!isLast) startTimer(+card.dataset.rest,'Recupero'); else stopTimer();
+    }
+  }
+  progress();
+});
+</script>
+</body>
+</html>

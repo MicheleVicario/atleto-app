@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Accesso e account</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<div class="wrap" data-scope>
+  <div class="top">
+    <div>
+      <a class="back" href="index.html">← Tutte le anteprime</a>
+      <h1>Percorsi comuni</h1>
+      <p>Registrazione, utente gratuito, inviti, account. Scegli il passaggio qui sotto o usa i pulsanti nel telefono.</p>
+    </div>
+  </div>
+  <div class="flowbar">
+    <button class="on" data-go="reg">1 · Registrazione</button>
+    <button data-go="codice">2 · Codice email</button>
+    <button data-go="free">3 · Utente gratuito</button>
+    <button data-go="invito">4 · Invito del trainer</button>
+    <button data-go="minore">4b · Minorenne</button>
+    <button data-go="account">5 · Account</button>
+    <button data-go="cancella">6 · Cancellazione</button>
+    <button data-go="tr1">7 · Diventare trainer</button>
+  </div>
+
+  <div class="phones">
+    <div class="phone">
+      <!-- 1 REGISTRAZIONE -->
+      <div data-screen="reg" style="display:contents">
+        <div class="ph-head"><div class="t">Crea il tuo account</div><div class="muted xs">Gratis. Per salvare gli allenamenti serve un trainer.</div></div>
+        <div class="ph-body">
+          <label class="field">Email<input placeholder="nome@esempio.it"></label>
+          <label class="field">Password<input type="password" value="12345678901"><span class="xs">Almeno 10 caratteri</span></label>
+          <label class="field">Data di nascita<input placeholder="gg/mm/aaaa"><span class="xs">Serve a verificare l'età minima (14 anni)</span></label>
+          <label class="check"><input type="checkbox"> Ho letto e accetto i <a href="#">Termini</a></label>
+          <label class="check"><input type="checkbox"> Ho letto l'<a href="#">Informativa privacy</a></label>
+          <button class="btn primary block" data-go="codice">Crea account</button>
+          <p class="small muted" style="text-align:center">Hai già un account? <a href="#">Accedi</a></p>
+        </div>
+      </div>
+
+      <!-- 2 CODICE -->
+      <div data-screen="codice" hidden style="display:contents">
+        <div class="ph-head"><div class="t">Controlla la tua email</div></div>
+        <div class="ph-body">
+          <p class="small">Abbiamo mandato un codice di 6 cifre a <b>luca@…</b>. Scade tra 15 minuti.</p>
+          <div class="row" style="justify-content:center;gap:6px">
+            <input maxlength="1" value="4" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+            <input maxlength="1" value="8" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+            <input maxlength="1" value="2" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+            <input maxlength="1" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+            <input maxlength="1" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+            <input maxlength="1" style="width:44px;height:52px;text-align:center;font-size:22px;border:1px solid var(--line);border-radius:10px;background:var(--surface)">
+          </div>
+          <button class="btn primary block" data-go="free">Conferma</button>
+          <p class="small muted" style="text-align:center">Non è arrivato? <a href="#">Invia di nuovo</a> (tra 60 s)</p>
+        </div>
+      </div>
+
+      <!-- 3 UTENTE GRATUITO -->
+      <div data-screen="free" hidden style="display:contents">
+        <div class="ph-head"><div class="muted xs">Ciao Luca</div><div class="t">Allenati</div></div>
+        <div class="ph-body">
+          <button class="card pad" data-go="invito" style="text-align:left;border-color:var(--accent);background:var(--accent-soft);cursor:pointer">
+            <b>Marco R. ti ha invitato</b><div class="small">Diventa suo cliente e salva i tuoi allenamenti →</div>
+          </button>
+          <div class="card pad">
+            <b style="font-size:17px">Nuovo allenamento</b>
+            <div class="small muted">Scegli gli esercizi, usa timer e cronometro.</div>
+            <div class="row" style="margin-top:10px"><button class="btn primary">+ Esercizio</button><button class="btn">⏱ Cronometro</button><button class="btn">◷ Timer</button></div>
+          </div>
+          <div class="card pad">
+            <b>Allenamento in corso</b>
+            <div class="li"><div class="thumb">—</div><div class="grow">Squat<div class="xs muted">Esercizio fondamentale per le gambe.</div></div><span class="small">3 serie</span></div>
+            <div class="li"><div class="thumb">—</div><div class="grow">Plank<div class="xs muted">Tenuta per l'addome.</div></div><span class="small">2 serie</span></div>
+            <div class="xs muted">Immagini e video degli esercizi sono riservati ai clienti.</div>
+          </div>
+          <div class="card pad">
+            <button class="btn block" disabled>Salva allenamento</button>
+            <p class="small muted" style="margin-top:6px">Per salvare lo storico serve un trainer. Quando chiudi, questo allenamento non viene conservato.</p>
+          </div>
+          <button class="btn" data-go="account">Account</button>
+        </div>
+      </div>
+
+      <!-- 4 INVITO -->
+      <div data-screen="invito" hidden style="display:contents">
+        <div class="ph-head"><button class="back" data-go="free" style="border:0;background:none;padding:0;cursor:pointer">← Indietro</button><div class="t">Invito di Marco R.</div></div>
+        <div class="ph-body">
+          <div class="card pad row"><div class="av" style="width:52px;height:52px;flex-basis:52px">MR</div><div><b>Marco R.</b><div class="small muted">Istruttore fitness, 8 anni di esperienza.</div></div></div>
+          <div class="card pad">
+            <div class="li"><div class="grow muted">Accesso completo fino al</div><div><b>12/02/2027</b></div></div>
+            <div class="xs muted">Schede, storico, calendario, video degli esercizi e chat con Marco. Il pagamento lo concordi direttamente con lui.</div>
+          </div>
+          <div class="note blue small">Accettando, <b>Marco vedrà</b> il tuo nome, i giorni in cui ti alleni e potrà scriverti in chat. Non vedrà i dettagli delle serie. Potrai interrompere quando vuoi.</div>
+          <button class="btn primary block">Accetta e diventa cliente</button>
+          <button class="btn block">Rifiuta</button>
+        </div>
+      </div>
+
+      <!-- 4b MINORENNE -->
+      <div data-screen="minore" hidden style="display:contents">
+        <div class="ph-head"><div class="t">Invito di Marco R.</div></div>
+        <div class="ph-body">
+          <div class="note">Per diventare cliente bisogna avere <b>almeno 18 anni</b>. Puoi continuare a usare l'app gratis per allenarti con timer e cronometro.</div>
+          <p class="small muted">Più avanti un genitore potrà sottoscrivere l'abbonamento per te.</p>
+          <button class="btn block" data-go="free">Torna all'app</button>
+        </div>
+      </div>
+
+      <!-- 5 ACCOUNT -->
+      <div data-screen="account" hidden style="display:contents">
+        <div class="ph-head"><div class="t">Account</div></div>
+        <div class="ph-body">
+          <div class="card pad">
+            <div class="li"><div class="grow muted">Email</div><div>luca@… <a href="#" class="small">cambia</a></div></div>
+            <div class="li"><div class="grow muted">Password</div><div><a href="#" class="small">cambia</a></div></div>
+            <div class="li"><div class="grow muted">Dispositivi collegati</div><div>2 <a href="#" class="small">esci da tutti</a></div></div>
+          </div>
+          <div class="card pad">
+            <b>Documenti accettati</b>
+            <div class="li"><div class="grow">Termini di servizio</div><span class="xs muted">v1.0 · 19/11/2026</span></div>
+            <div class="li"><div class="grow">Informativa privacy</div><span class="xs muted">v1.0 · 19/11/2026</span></div>
+          </div>
+          <div class="card pad">
+            <b>I tuoi dati</b>
+            <div class="li"><div class="grow">Scarica una copia dei tuoi dati</div><button class="btn">Richiedi</button></div>
+            <div class="li"><div class="grow">Notifiche dei messaggi</div><span class="pill p-ok">attive</span></div>
+          </div>
+          <button class="btn danger block" data-go="cancella">Cancella account</button>
+          <button class="btn block">Esci</button>
+        </div>
+      </div>
+
+      <!-- 6 CANCELLAZIONE -->
+      <div data-screen="cancella" hidden style="display:contents">
+        <div class="ph-head"><button class="back" data-go="account" style="border:0;background:none;padding:0;cursor:pointer">← Indietro</button><div class="t">Cancella account</div></div>
+        <div class="ph-body">
+          <p class="small">Cosa succede:</p>
+          <ul class="small" style="margin:0;padding-left:18px">
+            <li>nome, email, data di nascita, allenamenti e messaggi vengono cancellati o resi anonimi;</li>
+            <li>i pagamenti restano registrati <b>senza il tuo nome</b> per gli obblighi fiscali (10 anni);</li>
+            <li>il collegamento con il tuo trainer si chiude: eventuali pagamenti già fatti a lui li gestisci direttamente con lui.</li>
+          </ul>
+          <label class="field">Per confermare scrivi la tua password<input type="password"></label>
+          <button class="btn danger block">Cancella definitivamente</button>
+          <p class="xs muted">Riceverai un'email di conferma.</p>
+        </div>
+      </div>
+
+      <!-- 7 DIVENTARE TRAINER -->
+      <div data-screen="tr1" hidden style="display:contents">
+        <div class="ph-head"><div class="muted xs">Invito dell'amministratore</div><div class="t">Diventa trainer su Atleto</div></div>
+        <div class="ph-body">
+          <div class="card pad">
+            <div class="row"><span class="pill p-ok">1 · Accetta</span><span class="pill p-acc">2 · Documenti</span><span class="pill">3 · Profilo</span><span class="pill">4 · Verifica</span><span class="pill">5 · Prova gratuita</span></div>
+          </div>
+          <div class="card pad stack">
+            <b>Carica i documenti</b>
+            <div class="li"><div class="grow">Documento d'identità<div class="xs muted">obbligatorio</div></div><span class="pill p-ok">caricato</span></div>
+            <div class="li"><div class="grow">Certificazione (es. attestato CONI)<div class="xs muted">obbligatoria</div></div><button class="btn">Carica</button></div>
+            <div class="li"><div class="grow">Assicurazione RC professionale<div class="xs muted">facoltativa</div></div><button class="btn">Carica</button></div>
+            <div class="xs muted">Li vede solo l'amministratore, per verificarli.</div>
+          </div>
+          <div class="card pad stack">
+            <b>Da accettare</b>
+            <label class="check"><input type="checkbox"> Termini per i trainer</label>
+            <label class="check"><input type="checkbox"> Informativa privacy per i trainer</label>
+            <label class="check"><input type="checkbox"> Liberatoria sui contenuti (esercizi, foto, video)</label>
+          </div>
+          <div class="card pad">
+            <b>Il tuo abbonamento</b>
+            <div class="small" style="margin-top:4px"><b>Primo mese gratis</b>, poi XX €/mese con rinnovo automatico. Clienti illimitati. Disdici quando vuoi.</div>
+            <div class="xs muted" style="margin-top:4px">La prova parte quando il tuo account viene attivato. Puoi aggiungere la carta adesso o entro la fine della prova.</div>
+          </div>
+          <button class="btn primary block">Continua</button>
+          <p class="xs muted">Dopo la verifica dei documenti ricevi un'email e si attiva l'area di gestione.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card side">
+      <h3>Cosa mostra</h3>
+      <ul>
+        <li><b>Registrazione</b> con email, password e data di nascita; il codice di 6 cifre verifica l'email.</li>
+        <li><b>Utente gratuito:</b> costruisce l'allenamento con la libreria, senza immagini e video, e non può salvarlo.</li>
+        <li><b>Invito:</b> il cliente vede fino a quando sarà attivo e cosa condivide con il trainer. Il pagamento si accorda con il trainer, fuori dall'app. Sotto i 18 anni non può accettare.</li>
+        <li><b>Account</b> con documenti accettati, copia dei dati e cancellazione: obbligatori per il GDPR.</li>
+        <li><b>Diventare trainer:</b> invito dell'amministratore, documenti, accettazione dei termini, verifica, primo mese gratis.</li>
+      </ul>
+      
+    </div>
+  </div>
+</div>
+<script src="nav.js"></script>
+</body>
+</html>

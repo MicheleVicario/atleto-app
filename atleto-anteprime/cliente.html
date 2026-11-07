@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area cliente</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a class="back" href="index.html">← Tutte le anteprime</a>
+      <h1>Cliente</h1>
+      <p>Luca, cliente di Marco R. Si usa solo dal telefono. Tocca le voci in basso per cambiare schermata.</p>
+    </div>
+  </div>
+
+  <div class="phones">
+    <div class="phone" data-scope>
+      <!-- HOME -->
+      <div data-screen="home" style="display:contents">
+        <div class="ph-head"><div class="muted xs">Ciao Luca</div><div class="t">Oggi si allena?</div></div>
+        <div class="ph-body">
+          <div class="card pad">
+            <div class="row between"><b>Forza – Gennaio</b><span class="pill p-blue">settimana 3 di 8</span></div>
+            <div class="muted small" style="margin-top:2px">Scheda di Marco R. · aggiornata il 10/11</div>
+          </div>
+
+          <a class="card pad" href="scheda.html" style="text-decoration:none;color:inherit;display:block">
+            <div class="row between"><b style="font-size:17px">Giorno A</b><span class="pill p-acc">consigliato oggi</span></div>
+            <div class="muted small">Petto e dorso · 5 blocchi · circa 60 min</div>
+            <div class="xs muted" style="margin-top:6px">Ultima volta: lunedì 9/11</div>
+            <div class="btn primary block" style="margin-top:10px">Inizia allenamento</div>
+          </a>
+          <div class="card pad">
+            <div class="row between"><b style="font-size:17px">Giorno B</b><span class="pill">fatto mercoledì</span></div>
+            <div class="muted small">Gambe · 4 blocchi · circa 55 min</div>
+          </div>
+          <div class="card pad">
+            <div class="row between"><b style="font-size:17px">Giorno C</b><span class="pill">fatto venerdì</span></div>
+            <div class="muted small">Corsa e core · 3 blocchi · circa 45 min</div>
+          </div>
+
+          <div class="card pad row between">
+            <div><b>Questo mese</b><div class="muted small">9 allenamenti · 3 di fila</div></div>
+            <button class="btn" data-go="calendario">Calendario</button>
+          </div>
+          <div class="note blue">Accesso attivato da Marco fino al <b>12/02/2027</b>. Ti avviseremo 7 e 3 giorni prima.</div>
+        </div>
+      </div>
+
+      <!-- CALENDARIO -->
+      <div data-screen="calendario" hidden style="display:contents">
+        <div class="ph-head"><div class="muted xs">I tuoi allenamenti</div><div class="t">Novembre 2026</div></div>
+        <div class="ph-body">
+          <div class="card pad">
+            <div class="cal" id="cal"></div>
+          </div>
+          <div class="card pad">
+            <b>Venerdì 13</b>
+            <div class="li"><div class="thumb">C</div><div class="grow"><div>Giorno C · Corsa e core</div><div class="xs muted">48 min · 14 serie su 15 completate</div></div></div>
+          </div>
+          <div class="stats" style="grid-template-columns:1fr 1fr">
+            <div class="card stat"><div class="muted xs">Questo mese</div><div class="v">9</div></div>
+            <div class="card stat"><div class="muted xs">Record nuovi</div><div class="v">2</div></div>
+          </div>
+          <div class="card pad">
+            <b>Record personali</b>
+            <div class="li"><div class="grow">Panca piana</div><b>65 kg × 8</b></div>
+            <div class="li"><div class="grow">Plank</div><b>1' 10"</b></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHAT -->
+      <div data-screen="chat" hidden style="display:contents">
+        <div class="ph-head row"><div class="av">MR</div><div><div class="t" style="font-size:16px">Marco R.</div><div class="xs muted">il tuo trainer</div></div></div>
+        <div class="ph-body">
+          <div class="chat">
+            <div class="msg sys">Nuova scheda disponibile: Forza – Gennaio</div>
+            <div class="msg">Ciao Luca, ti ho messo la scheda nuova. Inizia leggero la prima settimana 💪<span class="tm">10/11 · 18:02</span></div>
+            <div class="msg me">Perfetto, grazie! Il circuito finale lo faccio tutto di fila?<span class="tm">18:15</span></div>
+            <div class="msg">Sì, parte il timer da solo. Se non ce la fai, fermati e riprendi.<span class="tm">18:20</span></div>
+            <div class="msg me">Ok 👍<span class="tm">18:21 · letto</span></div>
+          </div>
+          <div class="note xs">Solo testo: niente foto, video o audio. Per problemi di salute rivolgiti a un medico, non scriverli qui.</div>
+        </div>
+        <div class="composer"><input placeholder="Scrivi a Marco…"><button class="btn primary">Invia</button></div>
+      </div>
+
+      <!-- PROFILO -->
+      <div data-screen="profilo" hidden style="display:contents">
+        <div class="ph-head"><div class="t">Profilo</div></div>
+        <div class="ph-body">
+          <div class="card pad">
+            <b>Accesso</b>
+            <div class="li"><div class="grow muted">Trainer</div><div>Marco R.</div></div>
+            <div class="li"><div class="grow muted">Attivo fino al</div><div>12/02/2027</div></div>
+            <div class="xs muted">Il pagamento lo concordi direttamente con Marco: sarà lui a prolungare il tuo accesso.</div>
+          </div>
+          <div class="card pad">
+            <b>I miei dati</b>
+            <div class="li"><div class="grow muted">Nome</div><div>Luca Bianchi</div></div>
+            <div class="li"><div class="grow muted">Email</div><div>luca@…</div></div>
+            <div class="li"><div class="grow muted">Data di nascita</div><div>04/03/1994</div></div>
+            <div class="xs muted">Li vedete solo tu e l'amministratore. Il trainer vede nome e calendario.</div>
+          </div>
+          <a class="btn block" href="accesso.html">Account, documenti e cancellazione →</a>
+        </div>
+      </div>
+
+      <nav class="ph-nav">
+        <button class="on" data-go="home"><b>⌂</b>Home</button>
+        <button data-go="calendario"><b>▦</b>Calendario</button>
+        <button data-go="chat"><b>✉</b>Chat</button>
+        <button data-go="profilo"><b>◯</b>Profilo</button>
+      </nav>
+    </div>
+
+    <div class="card side">
+      <h3>Cosa mostra</h3>
+      <ul>
+        <li><b>Home:</b> una card per ogni giorno della scheda. «Inizia allenamento» apre la schermata dell'allenamento (l'anteprima della scheda).</li>
+        <li><b>Calendario:</b> i giorni allenati in verde, il dettaglio della seduta e i record personali.</li>
+        <li><b>Chat</b> solo testo con il trainer. Le notifiche push arrivano solo per i messaggi.</li>
+        <li><b>Profilo:</b> fino a quando è attivo l'accesso e dati personali. Il pagamento al trainer avviene fuori dall'app.</li>
+      </ul>
+      
+    </div>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script>
+// Calendario di novembre 2026 (inizia di domenica)
+var cal=document.getElementById('cal'), done=[2,4,6,9,11,13,16,18,20], h='';
+['L','M','M','G','V','S','D'].forEach(function(x){h+='<div class="h">'+x+'</div>';});
+for(var i=0;i<6;i++) h+='<div class="d x"></div>';
+for(var d=1;d<=30;d++) h+='<div class="d'+(done.indexOf(d)>=0?' on':'')+(d===21?' today':'')+'">'+d+'</div>';
+cal.innerHTML=h;
+</script>
+</body>
+</html>

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Area trainer</title>
+<link rel="stylesheet" href="stile.css">
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <div>
+      <a class="back" href="index.html">← Tutte le anteprime</a>
+      <h1>Trainer · area di gestione</h1>
+      <p>Marco R. Pensata per computer e telefono: restringi la finestra per vedere come si adatta.</p>
+    </div>
+  </div>
+
+  <div class="shell" data-scope>
+    <nav class="card menu">
+      <button class="on" data-go="oggi">Oggi <span class="badge">5</span></button>
+      <button data-go="clienti">Clienti</button>
+      <button data-go="schede">Schede</button>
+      <button data-go="libreria">Libreria</button>
+      <div class="sep">Altro</div>
+      <button data-go="abbonamento">Abbonamento</button>
+      <button data-go="statistiche">Statistiche</button>
+      <button data-go="profilo">Profilo</button>
+    </nav>
+
+    <main class="main stack">
+      <!-- OGGI -->
+      <section data-screen="oggi" class="stack">
+        <div class="row between"><h2>Oggi</h2><button class="btn primary" data-open="invita">+ Invita cliente</button></div>
+        <div data-scope class="stack">
+          <div class="flowbar" style="margin:0"><span class="xs muted" style="align-self:center">Prova le situazioni:</span>
+            <button class="on" data-go="s-prova">Prova gratuita</button><button data-go="s-ok">Canone pagato</button><button data-go="s-ko">Pagamento non riuscito</button><button data-go="s-recesso">Recesso richiesto</button></div>
+          <div data-screen="s-prova" class="note blue row between"><div><b>Prova gratuita:</b> ti restano <b>18 giorni</b>. Poi XX €/mese, rinnovo automatico.</div><button class="btn" data-go2="abbonamento">Aggiungi carta</button></div>
+          <div data-screen="s-ok" hidden></div>
+          <div data-screen="s-recesso" hidden class="note row between"><div><b>Hai chiesto il recesso.</b> Atleto resta attivo fino al <b>09/12/2026</b>, poi tu perdi l'area di gestione e i tuoi 14 clienti l'accesso da cliente.</div><button class="btn" data-go2="abbonamento">Annulla il recesso</button></div>
+          <div data-screen="s-ko" hidden class="card pad" style="border-color:var(--bad);background:var(--bad-soft)">
+            <div class="row between"><div><b>Pagamento del canone non riuscito</b><div class="small">Aggiorna il metodo di pagamento entro il tempo indicato, altrimenti il tuo account viene sospeso e <b>i tuoi clienti perdono l'accesso</b>.</div></div>
+              <div style="text-align:center"><div style="font-size:30px;font-weight:700;color:var(--bad);font-variant-numeric:tabular-nums" id="countdown">4g 23:59:59</div><div class="xs muted">alla sospensione</div></div></div>
+            <button class="btn primary" style="margin-top:10px">Aggiorna metodo di pagamento</button>
+          </div>
+        </div>
+        <div class="card pad">
+          <div class="task"><div class="ic p-bad">!</div><div class="grow"><b>Sara M.</b> · accesso scaduto da 2 giorni<div class="small muted">Hai ancora 5 giorni per rinnovarlo, poi il rapporto si chiude.</div></div><button class="btn" data-open="rinnovo">Rinnova accesso</button></div>
+          <div class="task"><div class="ic p-warn">⏳</div><div class="grow"><b>Luca B.</b> · accesso in scadenza tra 3 giorni<div class="small muted">Attivo fino al 24/11/2026</div></div><button class="btn" data-open="rinnovo">Rinnova accesso</button></div>
+          <div class="task"><div class="ic p-blue">✉</div><div class="grow"><b>3 messaggi</b> non letti<div class="small muted">Luca B. (2), Paolo V. (1)</div></div><button class="btn" data-go="cliente">Leggi</button></div>
+          <div class="task"><div class="ic p-acc">→</div><div class="grow"><b>Invito in attesa</b> · anna.r@…<div class="small muted">Inviato 2 giorni fa, scade tra 5 giorni</div></div><button class="btn">Annulla invito</button></div>
+          <div class="task"><div class="ic p-ok">✓</div><div class="grow"><b>Esercizio approvato:</b> Panca con pausa<div class="small muted">Ora è nella libreria con il tuo video.</div></div></div>
+        </div>
+        <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(150px,1fr))">
+          <div class="card stat"><div class="muted xs">Clienti attivi</div><div class="v">14</div></div>
+          <div class="card stat"><div class="muted xs">Accessi in scadenza (7 giorni)</div><div class="v">2</div></div>
+          <div class="card stat"><div class="muted xs">Allenamenti questa settimana</div><div class="v">31</div></div>
+        </div>
+      </section>
+
+      <!-- CLIENTI -->
+      <section data-screen="clienti" class="stack" hidden>
+        <div class="row between"><h2>Clienti</h2><button class="btn primary" data-open="invita">+ Invita cliente</button></div>
+        <div class="row"><input style="flex:1;min-width:180px;border:1px solid var(--line);border-radius:9px;padding:9px 10px;background:var(--surface)" placeholder="Cerca cliente…"><span class="pill p-ok">Attivi 14</span><span class="pill p-warn">In scadenza 2</span><span class="pill p-bad">Scaduti 1</span></div>
+        <div class="card pad tscroll">
+          <table class="t">
+            <thead><tr><th>Cliente</th><th>Accesso fino al</th><th>Stato</th><th>Ultimo allenamento</th><th></th></tr></thead>
+            <tbody>
+              <tr><td><b>Luca B.</b></td><td>24/11/2026</td><td><span class="pill p-warn">scade tra 3 giorni</span></td><td>ieri</td><td><button class="btn" data-go="cliente">Apri</button></td></tr>
+              <tr><td><b>Sara M.</b></td><td>19/11/2026</td><td><span class="pill p-bad">scaduto · 5 gg per rinnovare</span></td><td>8 giorni fa</td><td><button class="btn" data-go="cliente">Apri</button></td></tr>
+              <tr><td><b>Giulia T.</b></td><td>02/12/2026</td><td><span class="pill p-ok">attivo</span></td><td>2 giorni fa</td><td><button class="btn" data-go="cliente">Apri</button></td></tr>
+              <tr><td><b>Paolo V.</b></td><td>05/09/2027</td><td><span class="pill p-ok">attivo</span></td><td>oggi</td><td><button class="btn" data-go="cliente">Apri</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- PAGINA CLIENTE -->
+      <section data-screen="cliente" class="stack" hidden>
+        <button class="back" data-go="clienti" style="border:0;background:none;padding:0;cursor:pointer;text-align:left">← Clienti</button>
+        <div class="card pad row between">
+          <div class="row"><div class="av">LB</div><div><h2 style="font-size:19px">Luca Bianchi</h2><div class="small muted">Cliente dal 12/08/2026 · accesso fino al <b>24/11/2026</b></div></div></div>
+          <button class="btn primary" data-open="rinnovo">Rinnova accesso</button>
+        </div>
+        <div class="card pad" data-scope>
+          <div class="ptabs">
+            <button class="on" data-go="t-cal">Calendario</button>
+            <button data-go="t-scheda">Scheda</button>
+            <button data-go="t-chat">Chat <span class="badge">2</span></button>
+          </div>
+          <div data-screen="t-cal">
+            <div class="grid2">
+              <div><b>Novembre 2026</b><div class="cal" id="cal" style="margin-top:8px"></div></div>
+              <div class="stack">
+                <div class="note blue small">Vedi <b>in quali giorni</b> si è allenato, non il dettaglio delle serie.</div>
+                <div class="stats" style="grid-template-columns:1fr 1fr">
+                  <div class="card stat"><div class="muted xs">Novembre</div><div class="v">9</div></div>
+                  <div class="card stat"><div class="muted xs">Ottobre</div><div class="v">12</div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div data-screen="t-scheda" hidden class="stack">
+            <div class="row between"><div><b>Forza – Gennaio</b> <span class="pill p-ok">attiva</span><div class="small muted">3 giorni · 8 settimane · dal 10/11 · aperta da Luca il 10/11</div></div>
+              <div class="row"><a class="btn" href="scheda.html">Modifica</a><button class="btn">Duplica</button><a class="btn primary" href="scheda.html">Nuova scheda</a></div></div>
+            <div class="list">
+              <div class="li"><div class="grow">Giorno A · Petto e dorso</div><span class="muted small">5 blocchi</span></div>
+              <div class="li"><div class="grow">Giorno B · Gambe</div><span class="muted small">4 blocchi</span></div>
+              <div class="li"><div class="grow">Giorno C · Corsa e core</div><span class="muted small">3 blocchi</span></div>
+            </div>
+            <div class="small muted">Schede precedenti: Base – Ottobre (sostituita il 10/11)</div>
+          </div>
+          <div data-screen="t-chat" hidden>
+            <div class="chat" style="max-width:560px">
+              <div class="msg me">Ciao Luca, ti ho messo la scheda nuova. Inizia leggero la prima settimana 💪<span class="tm">10/11 · 18:02</span></div>
+              <div class="msg">Perfetto, grazie! Il circuito finale lo faccio tutto di fila?<span class="tm">18:15</span></div>
+            </div>
+            <div class="composer" style="margin:12px -16px -14px;border-radius:0 0 12px 12px"><input placeholder="Scrivi a Luca…"><button class="btn primary">Invia</button></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SCHEDE -->
+      <section data-screen="schede" class="stack" hidden>
+        <div class="row between"><h2>Schede</h2><a class="btn primary" href="scheda.html">+ Nuova scheda</a></div>
+        <div class="grid2">
+          <div class="card pad">
+            <b>Modelli</b> <span class="muted small">· non assegnati a nessuno</span>
+            <div class="list" style="margin-top:6px">
+              <div class="li"><div class="grow">Principiante 3 giorni<div class="xs muted">usato 6 volte</div></div><button class="btn">Assegna</button></div>
+              <div class="li"><div class="grow">Ipertrofia 4 giorni<div class="xs muted">usato 3 volte</div></div><button class="btn">Assegna</button></div>
+              <div class="li"><div class="grow">Preparazione 10 km<div class="xs muted">usato 1 volta</div></div><button class="btn">Assegna</button></div>
+            </div>
+          </div>
+          <div class="card pad">
+            <b>Assegnate ai clienti</b>
+            <div class="list" style="margin-top:6px">
+              <div class="li"><div class="grow">Forza – Gennaio<div class="xs muted">Luca B.</div></div><button class="btn">Duplica</button></div>
+              <div class="li"><div class="grow">Tonificazione<div class="xs muted">Sara M.</div></div><button class="btn">Duplica</button></div>
+              <div class="li"><div class="grow">La mia scheda<div class="xs muted">te stesso</div></div><button class="btn">Duplica</button></div>
+            </div>
+          </div>
+        </div>
+        <div class="note blue small">Duplicando si copiano giorni, blocchi ed esercizi, mai i dati del cliente. Poi la modifichi e la assegni a un altro cliente o la salvi come modello.</div>
+      </section>
+
+      <!-- LIBRERIA -->
+      <section data-screen="libreria" class="stack" hidden>
+        <div class="row between"><h2>Libreria</h2><button class="btn primary" data-open="proponi">+ Proponi esercizio</button></div>
+        <div class="row"><input style="flex:1;min-width:180px;border:1px solid var(--line);border-radius:9px;padding:9px 10px;background:var(--surface)" placeholder="Cerca per nome…"><span class="pill">Gruppo muscolare ▾</span><span class="pill">Attrezzo ▾</span><span class="pill">Sport ▾</span></div>
+        <div class="card pad">
+          <b>I miei esercizi proposti</b>
+          <div class="list" style="margin-top:6px">
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Panca con pausa</div><span class="pill p-ok">approvato</span></div>
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Affondo bulgaro con elastico<div class="xs muted">I tuoi clienti lo vedono già, solo come testo</div></div><span class="pill p-warn">in attesa</span></div>
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Stacco su un piede<div class="xs muted">Motivo: il video è troppo scuro, ricaricalo</div></div><span class="pill p-bad">rifiutato</span></div>
+          </div>
+        </div>
+        <div class="card pad">
+          <b>Libreria ufficiale</b> <span class="muted small">· 412 esercizi</span>
+          <div class="list" style="margin-top:6px">
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Panca piana con bilanciere<div class="xs muted">Petto · Bilanciere</div></div></div>
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Trazioni alla sbarra<div class="xs muted">Dorso · Corpo libero</div></div></div>
+            <div class="li"><div class="thumb">GIF</div><div class="grow">Corsa su tapis roulant<div class="xs muted">Cardio · Corsa</div></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STATISTICHE -->
+      <section data-screen="statistiche" class="stack" hidden>
+        <h2>Statistiche</h2>
+        <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(160px,1fr))">
+          <div class="card stat"><div class="muted xs">Clienti attivi</div><div class="v">14</div></div>
+          <div class="card stat"><div class="muted xs">Nuovi clienti a novembre</div><div class="v">3</div></div>
+          <div class="card stat"><div class="muted xs">Allenamenti dei clienti a novembre</div><div class="v">118</div></div>
+        </div>
+        <div class="card pad">
+          <b>Clienti attivi per mese</b>
+          <div class="bars" style="margin-bottom:22px">
+            <div style="height:40%"><span>giu</span></div><div style="height:50%"><span>lug</span></div><div style="height:45%"><span>ago</span></div>
+            <div style="height:65%"><span>set</span></div><div style="height:80%"><span>ott</span></div><div style="height:90%"><span>nov</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABBONAMENTO -->
+      <section data-screen="abbonamento" class="stack" hidden>
+        <h2>Abbonamento ad Atleto</h2>
+        <div class="grid2">
+          <div class="card pad stack">
+            <div class="row between"><b>Piano Trainer</b><span class="pill p-blue">prova gratuita</span></div>
+            <div style="font-size:28px;font-weight:700">XX € <span class="small muted" style="font-weight:400">/ mese</span></div>
+            <div class="li"><div class="grow muted">Prova gratuita fino al</div><div>09/12/2026</div></div>
+            <div class="li"><div class="grow muted">Primo addebito</div><div>09/12/2026</div></div>
+            <div class="li"><div class="grow muted">Clienti</div><div>illimitati</div></div>
+            <div class="xs muted">Ti avvisiamo 7 giorni prima di ogni rinnovo. Puoi recedere quando vuoi: resti attivo fino alla fine del mese già pagato e il mese successivo non ti viene addebitato.</div>
+          </div>
+          <div class="card pad stack">
+            <b>Metodo di pagamento</b>
+            <div class="li"><div class="thumb" style="width:44px;height:30px">VISA</div><div class="grow">•••• 4242<div class="xs muted">scade 08/28</div></div><button class="btn">Cambia</button></div>
+            <b style="margin-top:6px">Ricevute</b>
+            <div class="li"><div class="grow muted small">Le ricevute compariranno qui dopo il primo pagamento.</div></div>
+            <button class="btn danger" data-open="recesso">Recedi dal contratto</button>
+          </div>
+        </div>
+        <div class="note small">Se un pagamento non va a buon fine hai <b>7 giorni</b> per sistemarlo, con il conto alla rovescia nella pagina «Oggi». Poi l'account viene sospeso e i tuoi clienti perdono l'accesso finché non paghi.</div>
+      </section>
+
+      <!-- PROFILO -->
+      <section data-screen="profilo" class="stack" hidden>
+        <h2>Profilo</h2>
+        <div class="grid2">
+          <div class="card pad stack">
+            <b>Visibile ai tuoi clienti</b>
+            <div class="row"><div class="av" style="width:56px;height:56px;flex-basis:56px">MR</div><button class="btn">Cambia foto</button></div>
+            <label class="field">Nome<input value="Marco R."></label>
+            <label class="field">Presentazione<textarea rows="3">Istruttore fitness, 8 anni di esperienza. Forza e ricomposizione corporea.</textarea></label>
+          </div>
+          <div class="card pad stack">
+            <b>Documenti</b>
+            <div class="li"><div class="grow">Documento d'identità</div><span class="pill p-ok">verificato</span></div>
+            <div class="li"><div class="grow">Attestato CONI istruttore</div><span class="pill p-ok">verificato</span></div>
+            <div class="li"><div class="grow">Assicurazione RC<div class="xs muted">facoltativa</div></div><button class="btn">Carica</button></div>
+            <div class="xs muted">Li vede solo l'amministratore.</div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  
+</div>
+
+<!-- Finestre -->
+<div class="modal" id="invita" hidden>
+  <div class="card pad stack">
+    <b style="font-size:17px">Invita un cliente</b>
+    <label class="field">Email del cliente<input placeholder="nome@esempio.it"></label>
+    <div class="xs muted">Il cliente deve essersi già registrato su Atleto.it con questa email.</div>
+    <label class="field">Accesso attivo fino al<input value="21/02/2027"></label>
+    <div class="row"><span class="pill">+1 mese</span><span class="pill p-acc">+3 mesi</span><span class="pill">+6 mesi</span><span class="pill">+12 mesi</span></div>
+    <div class="note blue xs">Il pagamento lo concordi tu con il cliente, fuori dall'app. Il cliente riceve l'invito e lo accetta: da quel momento vedi il suo calendario e potete scrivervi.</div>
+    <div class="row"><button class="btn" data-close>Annulla</button><button class="btn primary" data-close>Invia invito</button></div>
+  </div>
+</div>
+<div class="modal" id="recesso" hidden>
+  <div class="card pad" data-scope>
+    <div data-screen="r1" class="stack">
+      <b style="font-size:17px">Recedere dal contratto?</b>
+      <div class="note blue small">Hai già pagato il periodo in corso: <b>continui a usare Atleto fino al 09/12/2026</b>, con tutte le funzioni. Il mese successivo <b>non ti verrà addebitato</b>.</div>
+      <div class="small"><b>Dal 09/12/2026:</b></div>
+      <ul class="small" style="margin:0;padding-left:18px">
+        <li>non potrai più usare l'area di gestione (clienti, schede, chat);</li>
+        <li><b>i tuoi 14 clienti perderanno l'accesso da cliente</b>: torneranno utenti gratuiti, senza schede, storico e chat con te;</li>
+        <li>i dati restano conservati: se ti riabboni, tu e i tuoi clienti ritrovate tutto.</li>
+      </ul>
+      <div class="xs muted">Fino al 09/12 puoi annullare il recesso con un clic. Riceverai un'email di conferma.</div>
+      <div class="row"><button class="btn" data-close>Non recedere</button><button class="btn danger" data-go="r2">Conferma il recesso</button></div>
+    </div>
+    <div data-screen="r2" hidden class="stack">
+      <b style="font-size:17px">Recesso confermato</b>
+      <p class="small">Atleto resta attivo fino al <b>09/12/2026</b>. Non ti addebiteremo altro. Ti abbiamo inviato un'email di conferma.</p>
+      <div class="row"><button class="btn" data-go="r1">Annulla il recesso</button><button class="btn primary" data-close>Chiudi</button></div>
+    </div>
+  </div>
+</div>
+<div class="modal" id="rinnovo" hidden>
+  <div class="card pad stack">
+    <b style="font-size:17px">Rinnova accesso · Luca B.</b>
+    <div class="small muted">Attivo fino al 24/11/2026</div>
+    <label class="field">Nuova data di fine<input value="24/02/2027"></label>
+    <div class="row"><span class="pill">+1 mese</span><span class="pill p-acc">+3 mesi</span><span class="pill">+6 mesi</span><span class="pill">+12 mesi</span></div>
+    <div class="xs muted">Luca riceve un avviso con la nuova data.</div>
+    <div class="row"><button class="btn" data-close>Annulla</button><button class="btn primary" data-close>Rinnova</button></div>
+  </div>
+</div>
+<div class="modal" id="proponi" hidden>
+  <div class="card pad stack">
+    <b style="font-size:17px">Proponi un esercizio</b>
+    <label class="field">Nome<input placeholder="es. Affondo bulgaro con elastico"></label>
+    <label class="field">Come si esegue<textarea rows="3"></textarea></label>
+    <label class="field">Cosa si registra<select><option>Ripetizioni e carico</option><option>Ripetizioni</option><option>Tempo (tenuta)</option><option>Durata e distanza</option></select></label>
+    <label class="field">Video, GIF o immagine<input type="file"></label>
+    <label class="check"><input type="checkbox"> Accetto la liberatoria: cedo ad Atleto.it i diritti su testi e media</label>
+    <div class="note xs">Lo approva l'amministratore. Nel frattempo i tuoi clienti lo vedono solo come testo.</div>
+    <div class="row"><button class="btn" data-close>Annulla</button><button class="btn primary" data-close>Invia</button></div>
+  </div>
+</div>
+
+<script src="nav.js"></script>
+<script>
+var cal=document.getElementById('cal'), done=[2,4,6,9,11,13,16,18,20], h='';
+['L','M','M','G','V','S','D'].forEach(function(x){h+='<div class="h">'+x+'</div>';});
+for(var i=0;i<6;i++) h+='<div class="d x"></div>';
+for(var d=1;d<=30;d++) h+='<div class="d'+(done.indexOf(d)>=0?' on':'')+(d===21?' today':'')+'">'+d+'</div>';
+cal.innerHTML=h;
+// conto alla rovescia di esempio
+var end=Date.now()+ (4*86400+86399)*1000, cd=document.getElementById('countdown');
+setInterval(function(){var t=Math.max(0,Math.floor((end-Date.now())/1000));cd.textContent=Math.floor(t/86400)+'g '+String(Math.floor(t%86400/3600)).padStart(2,'0')+':'+String(Math.floor(t%3600/60)).padStart(2,'0')+':'+String(t%60).padStart(2,'0');},1000);
+document.addEventListener('click',function(e){var b=e.target.closest('[data-go2]');if(b)document.querySelector('.menu [data-go='+b.dataset.go2+']').click();});
+</script>
+</body>
+</html>
